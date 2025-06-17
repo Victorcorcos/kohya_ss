@@ -4,8 +4,8 @@
 
 ```sh
 /Users/victorcosta/Desktop/Ai/zLoRA/Turner
-rename_all "yuya_kazami"
-caption_all "yuya_kazami"
+rename_all "yumoto_hakone"
+caption_all "yumoto_hakone"
 ```
 
 > [!NOTE]
@@ -37,17 +37,17 @@ Choose the model we are going to train the LoRA on.
 
 2.2. `SDXL` → ✅
 
-2.3. **Trained Model output name**: Which name should we call this LoRA? (e.g. **yuya_kazami**)
+2.3. **Trained Model output name**: Which name should we call this LoRA? (e.g. **yumoto_hakone**)
 
 
 3. LoRA → **Dataset Preparation**
 
 3.1. **Instance Prompt**: The Instance Prompt ties your training images to the specific concept of "Takeru Higa"
 ```rb
-yuya_kazami, glasses, black-framed eyewear, black hair, brown hair, spiked hair, short hair, thick eyebrows, suit, formal, necktie, adjusting eyewear
+yumoto_hakone, glasses, black-framed eyewear, black hair, brown hair, spiked hair, short hair, thick eyebrows, suit, formal, necktie, adjusting eyewear
 ````
 
-3.2. **Class Prompt**: The class prompt tells the model what broad category your character belongs to, helping it differentiate your character from generic characters.
+3.2. **Class Prompt**: The Class Prompt isn’t actually used in LoRA (it’s a Dreambooth thing) but filling it won’t hurt. You can safely ignore it in LoRA. It tells the model what broad category your character belongs to, helping it differentiate your character from generic characters.
 
 ```rb
 1boy, man, male focus, male, solo
@@ -193,7 +193,7 @@ score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, year2023, u
 ```rb
 score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, year2023, uncensored, game cg, official art, official style, anime screencap, 1boy, male focus, solo focus, INSERT_HERE_YOUR_LORA, slim athlete, twink, testicles, male focus, precum, penis, uncensored, pubic hair, male pubic hair, <lora:Foreskin_pony:0.5> uncircumcised, foreskin, foreskin, veiny penis, solo, nipples, cloud, sky, abs, outdoors, erection, looking at viewer, precum drip, smile, crotch, blush, from below, teeth, phimosis, thighs, cloudy sky, thick thighs, grin, <lora:Expressive_H:1> expressiveh, best quality, amazing quality, best aesthetic, absurdres, <lora:pony_good_hands:1> good_hands <lora:Detailer_NoobAI_Incrs_v1:1.0> detailed <lora:TCV_illusXL_Incrs_v2:0.3> anime
 ```
-⤷ INSERT_HERE_YOUR_LORA = <lora:yuya_kazami-000001:1> yuya_kazami, glasses, black-framed eyewear, black hair, brown hair, spiked hair, short hair, thick eyebrows, suit, formal, necktie, adjusting eyewear
+⤷ INSERT_HERE_YOUR_LORA = <lora:yumoto_hakone-000001:1> yumoto_hakone, male focus, 1boy, blonde hair, solo, anime coloring, red eyes, brown eyes, official style
 
 - Prompt
 ```rb
@@ -205,14 +205,14 @@ muscles, toned body, defined anatomy, hyperrealism, sharp details, humanoid feat
 
 7.2. Script → X/Y/Z plot
 
-* `X type` → `Prompt S/R` → `yuya_kazami-000001,yuya_kazami-000002,yuya_kazami-000003,yuya_kazami-000004,yuya_kazami-000005,yuya_kazami-000006,yuya_kazami-000007,yuya_kazami-000008,yuya_kazami-000009,yuya_kazami-000010,yuya_kazami-000011,yuya_kazami-000012,yuya_kazami-000013,yuya_kazami-000014,yuya_kazami-000015,yuya_kazami`
+* `X type` → `Prompt S/R` → `yumoto_hakone-000001,yumoto_hakone-000002,yumoto_hakone-000003,yumoto_hakone-000004,yumoto_hakone-000005,yumoto_hakone-000006,yumoto_hakone-000007,yumoto_hakone-000008,yumoto_hakone-000009,yumoto_hakone-000010,yumoto_hakone-000011,yumoto_hakone-000012,yumoto_hakone-000013,yumoto_hakone-000014,yumoto_hakone-000015,yumoto_hakone`
 
 
 > [!TIP]
 > A code in ruby that will generate the `X type` above.
 
 ```rb
-# loras('yuya_kazami', 15)
+# loras('yumoto_hakone', 15)
 def loras(name, quantity)
   (1..quantity).map { |number| "#{name}-#{number.to_s.rjust(6, '0')}" }.join(',') + ",#{name}"
 end
