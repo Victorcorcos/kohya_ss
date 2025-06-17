@@ -1,0 +1,48 @@
+[general]
+pretrained_model_name_or_path = "/Users/victorcosta/Desktop/repositories/AI-generation/kohya_ss/models/hemorrhoids_v10.safetensors"
+output_dir = "/Users/victorcosta/Desktop/Ai/perfect_loras/yumoto_hakone/outputs"
+output_name = "yumoto_hakone"
+logging_dir = "/Users/victorcosta/Desktop/Ai/perfect_loras/yumoto_hakone/logs"
+
+[dataset]
+train_data_dir = "/Users/victorcosta/Desktop/Ai/perfect_loras/yumoto_hakone"
+resolution = "768,768"
+enable_bucket = true
+min_bucket_reso = 320
+max_bucket_reso = 960
+caption_extension = ".txt"
+shuffle_caption = true
+keep_tokens = 0
+
+[network]
+network_module = "lycoris.kohya"
+network_dim = 64                        # Good for character training with your dataset size
+network_alpha = 32                      # Half of network_dim (recommended)
+network_args = []
+network_train_unet_only = false
+network_train_text_encoder_only = false
+
+[training]
+train_batch_size = 4                    # Optimized for your M3 Pro Max
+gradient_accumulation_steps = 1
+learning_rate = 0.00005                 # Conservative rate for character training
+unet_lr = 0.00005                       # Separate U-Net learning rate
+text_encoder_lr = 0.000025              # Lower text encoder rate (half of U-Net)
+lr_scheduler = "cosine"
+lr_warmup_steps = 25                    # ~3% of total steps (optimal for your dataset)
+epochs = 1                              # Perfect for your dataset size
+save_every_n_epochs = 1                 # Save final LoRA
+mixed_precision = "no"                  # macOS MPS doesn't support fp16 mixed precision
+optimizer_type = "AdamW"
+max_grad_norm = 1.0
+clip_skip = 2
+persistent_data_loader_workers = true
+
+[saving]
+save_model_as = "safetensors"
+save_precision = "fp16"                 # Smaller file size
+
+[advanced]
+xformers = false
+sdpa = true
+lowram = true
